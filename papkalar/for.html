@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            margin: 200px auto 0;
+        }
+        h2 {
+            text-align: center;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 25px;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 18px;
+            box-sizing: border-box;
+        }
+        input:focus {
+            border: 2px solid #007bff ;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 20px;
+            margin: 15px 0 0;
+        }
+        button:hover {
+            background-color: #0061c7;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Ro'yhatdan o'tish</h2>
+        <form action="">
+            <div class="form-group">
+                <label for="ism">Ism:</label>
+                <input type="text" name="ism" id="ism" placeholder="Ismingizni yozing" required>         
+            </div>
+        <div class="form-group">
+               <label for="familiya">Familiya:</label>
+               <input type="text" name="familiya" id="familiya" placeholder="Familiyangizni yozing" required>
+        </div>
+        <div class="form-group">
+               <label for="t_sana">Tug'ilgan sana:</label>
+               <input type="date" name="t_sana" id="t_sana">
+        </div>
+        <div class="form-group">
+               <label for="tel">Tel raqami:</label>
+               <input type="number" name="tel" id="tel" placeholder="+998 96-543-21-87">
+        </div>
+              <button type="submit">Yuborish</button>
+    </form>
+    </div>
+</body>
+</html>

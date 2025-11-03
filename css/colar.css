@@ -1,0 +1,12 @@
+p {background-color: rgb(250, 250, 250);
+   background-image: url(oy.jpg);
+   background-repeat: no-repeat;
+   background-position: center; 
+   /* border: 5px solid rgb(160, 46, 160); */
+   /*  border: 5px dashed rgb(151, 62, 151); */
+   /*  border: 5px dotted rgb(170, 75, 170);  */
+   border: 5px double rgb(172, 74, 172);
+}
+h1 {
+  color: rgb(245, 22, 22);
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item</title>                                           
+    <style>
+        .flex-container {
+            display: flex;
+            padding: 20px;
+            background-color: #025;
+            border-radius: 10px; 
+            height: 600px;
+            flex-wrap: wrap;
+
+            /* flex-direction: row; "bu yerda row har doim turgan bo'ladi shuning uchun o'zgarmaydi"    */
+            /* flex-direction: column; "bu esa itemlarni ustun shakliga o'zgartirib beradi"  */
+            /* flex-direction: row-reverse; "bu itemlarni orqa tarfdn yozib beradi 3,2,1 kabi" */
+            /* flex-direction: column-reverse; "bu ham itemlarni past tarafidan yozib beradi past tarafdan 1,2,3 ustun shaklida " */
+
+            /* flex-wrap: nowrap; "bu elementlarni sig'ishiga qarab kichaytiradi" */
+            /* flex-wrap: wrap; "bu sig'magan elementlarni pastga joylashtirib beradi" */
+            /* flex-wrap: wrap-reverse; "bu elementlarni orqa tarafdan yozib beradi" */
+            
+            /* justify-content: center;"bu itemlarni o'rtaga joylashtirib beradi"      1 2 3     */
+            /* justify-content: flex-start;"bu itemlarni boshdan yozib beradi" 1 2 3*/
+            /* justify-content: flex-end; "bu orqa tarafdan joylashtirib beradi itemlarni"            1 2 3*/
+            /* justify-content: space-around;"bu itemlarni boshi va ohirini ochib beradi"   1   2   3  */
+            /* justify-content: space-between;"bu itemlarni oldi va ohirini bekitib beradi 1    2    3" */
+            /* justify-content: space-evenly;"bu itemlarni orasini ochib o'rtaga joylashtirib beradi,ya'ni boshi va ohirini ham     1     2     3   " */
+
+            /* align-items: center;"bu itemlarni ustunning o'rtasiga joylab beradi" */
+            /* align-items: flex-start;"bu itemlarni ustunning boshiga joylab beradi" */
+            /* align-items: flex-end;"bu itemlarni ustunning ohiriga joylab beradi" */
+            /* align-items: stretch;"bu itemlarni bo'yini uzaytirib beradi" */
+            /* align-items: baseline; "Misolda elementlar matnning asosiy chizig'iga mos kelishini ko'rsatish uchun turli shrift o'lchamidan foydalaniladi"*/
+            /* align-items: normal; */
+   
+            /* align-content: center;"bu itemlarni o'rtaga joylashtirib beradi  ustun ko'rinishida" */
+            /* align-content: stretch;"bu itemlarni uzaytirib joylab beradi" */
+            /* align-content: flex-start ;"itemlarni boshdan yozib beradi" */
+            /* align-content: flex-end;"bu itemlarni o'rtadan yozib beradi" */
+            /* align-content: space-around; */
+            /* align-content: space-between;"bu orasini ochib beradi itemlarni" */
+            align-content: space-evenly;
+        }
+        .flex-item {
+            padding: 60px 15px;
+            background-color: #fdebcd;
+            font-weight: bold;
+            margin: 10px;
+            border-radius: 10px;
+            width: 100px;
+            font-size: 26px;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-container">
+        <div class="flex-item" >Item 1</div>
+        <div class="flex-item" >Item 2</div>
+        <div class="flex-item" >Item 3</div>
+        <div class="flex-item" >Item 4</div>
+        <div class="flex-item" >Item 5</div>
+        <div class="flex-item" >Item 6</div>
+        <div class="flex-item" >Item 7</div>
+        <div class="flex-item " >Item 8</div>
+        <div class="flex-item" >Item 9</div>
+        <div class="flex-item" >Item 10</div>
+        <div class="flex-item" >Item 11</div>
+        <div class="flex-item" >Item 12</div>
+        <div class="flex-item" >Item 13</div>
+        <div class="flex-item" >Item 14</div>
+        <div class="flex-item" >Item 15</div>
+        <div class="flex-item" >Item 16</div>
+        <div class="flex-item" >Item 17</div>
+        <div class="flex-item" >Item 18</div>
+        <div class="flex-item" >Item 19</div>
+        <div class="flex-item" >Item 20</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <title>ARMY 3D Logo with V and J-Hope</title>
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(circle, #0f0c29, #302b63, #24243e);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1200px;
+      overflow: hidden;
+    }
+
+    .logo-container {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: spin 10s linear infinite;
+    }
+
+    .bar {
+      position: absolute;
+      width: 40px;
+      height: 100px;
+      background: linear-gradient(to top, #9c27b0, #e1bee7);
+      box-shadow: 0 0 20px #ba68c8;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .left, .right {
+      transform: translateY(30px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Arial', sans-serif;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .left {
+      transform: translateX(-50px) rotateY(10deg);
+      background: url(rasmlar/Kim.jpg) no-repeat center center;
+      background-size: cover;
+    }
+
+    .right {
+      transform: translateX(50px) rotateY(-10deg);
+      background: url(rasmlar/J-hope.jpg) no-repeat center center;
+      background-size: cover;
+    }
+
+    .text {
+      position: absolute;
+      top: 120%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: sans-serif;
+      color: #fff;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+    }
+
+    .text span {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #ba68c8;
+    }
+
+    @keyframes spin {
+      0% { transform: rotateY(0deg); }
+      100% { transform: rotateY(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="logo-container">
+  <div class="bar left">
+    <div class="text"><span>V</span></div>
+  </div>
+  <div class="bar right">
+    <div class="text"><span>J-Hope</span></div>
+  </div>
+  <div class="text">ARMY</div>
+</div>
+
+</body>
+</html>

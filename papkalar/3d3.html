@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+           background-image: url(hhh.jpg);
+           background-size: cover;
+        }
+        .box {      
+            border-radius: 50%;
+            background-color: rgb(234, 251, 122);
+            position: relative;
+            left: 0;
+            top: 0;
+            height: 400px;
+            width: 400px;
+            transition: background-color 5s, width 5s, height 5s, left 5s, top 5s, border-radius 5s;
+            box-shadow: 0px 0px 500px rgb(212, 187, 49);
+            transition-timing-function: ease-out;
+        }
+        .box:hover {
+            background-color: rgb(246, 197, 34);
+            position: relative;
+            left: 1830px;
+            top: 1120px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+</html>

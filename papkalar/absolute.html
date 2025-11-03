@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .absolute-box {
+            border:3px solid red;
+            height: 100px;
+            width: 500px;
+            position: absolute;
+            top: 20px;
+        }
+        #relative-box {
+            height: 300px;
+            border: 5px solid blueviolet;
+            position: relative;
+        }
+        h1 {
+            color: rgb(170, 114, 223);
+        }
+        p {
+            color: rgb(253, 142, 142);
+        }
+        div {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lorem, ipsum dolor.</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, dignissimos.</p>
+    <div>
+        <div id="relative-box">
+            <div class="absolute-box">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Est, asperiores.</div>
+        </div>
+    </div>
+</body>
+</html>

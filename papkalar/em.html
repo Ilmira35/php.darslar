@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            height: 20em;
+            width: 1000px;
+            border: 1px dashed rgb(162, 21, 162);
+            font-size: 15px;
+            border-radius: 0.5em;/*  0.5em x 15px=7.5px*/
+            padding: 5em;/* 0.5 x 15px=75px*/
+            background-color: rgb(162, 21, 162);
+            color: aliceblue;
+        } 
+        .box1 {
+            height: 20em;
+            width: 1000px;
+            border: 1px dashed rgb(21, 47, 162);
+            font-size: 2em;
+            border-radius: 0.5em;/*  0.5em x 15px=7.5px*/
+            padding: 5em;/* 0.5 x 15px=75px*/
+            background-color: rgb(21, 47, 162);
+            color: aliceblue;
+        }
+        .parent-box {
+            font-size: 10px;
+        }
+        .box2 {
+            height: 20em;
+            width: 1000px;
+            border: 1px dashed rgb(20, 155, 150);
+            font-size: 2em;
+            border-radius: 0.5em;/*  0.5em x 15px=7.5px*/
+            padding: 5em;/* 0.5 x 15px=75px*/
+            background-color: rgb(20, 150, 150);
+            color: aliceblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">Em o'lchov birligi uchun misol</div>
+    <div class="parent-box">
+        <div class="box1">Font-size xususiyati bo'lmagan holda</div>
+    </div>
+    <div class="parent-box1">
+        <div class="box2">Ota elementlarida font-size xususiyati bo'lmagn holda</div>
+    </div>
+</body>
+</html>

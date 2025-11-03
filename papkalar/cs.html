@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div p  {
+            background-color: yellowgreen;
+        }
+        div > p {
+            background-color: purple;
+        }
+        div + p {
+            background-color: blue;
+        }
+        div ~ p {
+            background-color: brown;
+        }
+    </style>
+</head>
+<body>
+    <h2>Avlod selektor</h2>
+    <p>Belgilangan elemetlarning avlodlari bo'lgan barcha elemetni tanalsh</p>
+    <div>
+        <p>paragraf 1 "divni ichida"</p>
+        <p>paragraf 2 "divni ichida"</p>
+        <section>
+            <p>paragraf 3 "div" ni ichida</p>
+        </section>
+    </div>
+    <p>paragraf 4 "div" ni ichida emas</p>
+    <p>paragraf 5 "div" ni ichida emas</p>
+    <div>
+       <p>paragraf </p>
+    </div>
+</body>
+</html>

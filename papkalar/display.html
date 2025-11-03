@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display</title>
+    <style>
+        h1,p {
+            background-color: purple;
+        }
+        a {
+            background-color: rgb(204, 110, 126);
+        }
+        span {
+            background-color: rgb(127, 79, 172);
+        }
+        .to-inline {
+            display: block;
+        }
+        .to-block {
+            display: block;
+        }
+        .to-inline-block {
+            display: inline-block;
+            width: 800px;
+            height: 200px;
+        }
+        h1.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!--Block element-->
+    <h1 class="to-inline hidden">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, magni!</h1>
+    <p class="to-inline">Lorem ipsum dolor sit amet.</p>
+    <!--Inline element-->
+    <a href="" class="to-block">Display</a>
+    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, pariatur!</span>
+    <h1 class="to-inline-block">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, quaerat.</h1>
+</body>
+</html>+

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <style>
+      body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    .calendar {
+      max-width: 500px;
+      margin: auto;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .calendar-header {
+      text-align: center;
+      padding: 20px;
+      color: white;
+      font-size: 1.5rem;
+      color: black;
+    }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      padding: 10px;
+      gap: 5px;
+      
+    }
+    .day-name {
+      font-weight: bold;
+      background-color: #0e80dd;
+      border-radius: 5px;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+    .day {
+      background-color: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      text-align: center;
+      padding: 10px;
+    }
+    .day:hover {
+        background-color: #e8ecec;
+    }
+    .box {
+        background-color: red;
+        color: white;
+    }
+    .box:hover {
+      background-color: red;
+    }
+    </style>
+</head>
+<body>
+    <div class="calendar">
+      <div class="calendar-header">May 2025</div>
+      <div class="calendar-grid">
+        
+        <div class="day-name">Dush</div>
+        <div class="day-name">Sesh</div>
+        <div class="day-name">Chor</div>
+        <div class="day-name">Pay</div>
+        <div class="day-name">Jum</div>
+        <div class="day-name">Shan</div>
+        <div class="day-name">Yak</div>
+    
+        <div class="day"></div>
+        <div class="day"></div>
+        <div class="day">1</div>
+        <div class="day">2</div>
+        <div class="day">3</div>
+        <div class="day">4</div>
+        <div class="day">5</div>
+        <div class="day">6</div>
+        <div class="day">7</div>
+        <div class="day">8</div>
+        <div class="day">9</div>
+        <div class="day">10</div>
+        <div class="day">11</div>
+        <div class="day">12</div>
+        <div class="day">13</div>
+        <div class="day">14</div>
+        <div class="day">15</div>   
+        <div class="day">16</div>
+        <div class="day">17</div>
+        <div class="day">18</div>
+        <div class="day">19</div>
+        <div class="day">20</div>
+        <div class="day box">21</div>
+        <div class="day">22</div>
+        <div class="day">23</div>
+        <div class="day">24</div>
+        <div class="day">25</div>
+        <div class="day">26</div>
+        <div class="day">28</div>
+        <div class="day">29</div>
+        <div class="day">30</div>
+        <div class="day">31</div>
+      </div>
+    </div>
+</body>
+</html>
