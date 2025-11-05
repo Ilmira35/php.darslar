@@ -2,7 +2,7 @@
 
                   //Birinchi dars
 
-// $ism = "Akbarshoh";
+// $ism = "Akbarshox";
 // $ism2 = 'Sarvar';
 // echo "Hello $ism";
 // echo "\n";
@@ -463,38 +463,82 @@
 
         //  O'n ikkinchi dars
 
-// birinchi usul
-$sonlar = array(5,12,34,65,42,1,"Test");
-// ikkinchi usul
-$sonlar1 = [8,45,63,72,53,5,4,3,2,1,"Test"];
-$cars = array("Volvo", "BMW", "Tayota");
-// var_dump($cars);
-print_r($cars);
+// // birinchi usul
+// $sonlar = array(5,12,34,65,42,1,"Test");
+// // ikkinchi usul
+// $sonlar1 = [8,45,63,72,53,5,4,3,2,1,"Test"];
+// $cars = array("Volvo", "BMW", "Tayota");
+// // var_dump($cars);
+// print_r($cars);
+// print_r($sonlar);
+// echo $sonlar[2];
+// echo "\n";
+// echo $sonlar[4];
+// $sonlar [4] = 45;
+// echo "\n";
+// echo $sonlar[4];
+// echo "\n";
+// foreach($sonlar as $item) {
+//         echo $item." ";
+// }
+// // massivga yangi qiymat qo'shish
+
+// $cars = array("Volvo", "BMW", "Tayota");
+// array_push($cars,"Chevrollet");
+// echo "\n";
+// print_r($cars);
+// $cars[] = "BYD";
+// print_r($cars);
+
+// $son = [4,8,"test"];
+// echo $son[2];
+// echo "\n";
+// $user = ["Ism" => "Ilmira", "Familiya" => "Abdullayeva","T_yili" => 2011];
+// echo $user["Ism"];
+// echo "\n";
+// $user["Familiya"] = "Sultonova";
+// echo $user["Familiya"];
+
+                  //     o'n uchinchi dars
+
+// $user = [
+//         "Ism" => "Ali",
+//         "Familiya" => "Ozodov",
+//         "T_yili" => 1996
+// ];
+// print_r($user);
+// $user['Familiya'] = "Komilov";
+// echo $user['Familiya'];
+// echo "\n";
+// foreach($user as $key => $item ){
+//         echo $key." ".$item.", ";
+// }
+$son = [];
+$son[0] = 12;
+$son[1] = 19;
+$son['ism'] = "test"; 
+print_r($son);
+$sonlar = [4,5,64,56,56,5,6,4,3,2,12];
+array_splice($sonlar,2,2);
 print_r($sonlar);
-echo $sonlar[2];
-echo "\n";
-echo $sonlar[4];
-$sonlar [4] = 45;
-echo "\n";
-echo $sonlar[4];
-echo "\n";
-foreach($sonlar as $item) {
-        echo $item." ";
-}
-// massivga yangi qiymat qo'shish
 
-$cars = array("Volvo", "BMW", "Tayota");
-array_push($cars,"Chevrollet");
-echo "\n";
-print_r($cars);
-$cars[] = "BYD";
-print_r($cars);
 
-$son = [4,8,"test"];
-echo $son[2];
-echo "\n";
-$user = ["Ism" => "Ilmira", "Familiya" => "Abdullayeva","T_yili" => 2011];
-echo $user["Ism"];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ?>
