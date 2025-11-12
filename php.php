@@ -513,16 +513,34 @@
 // foreach($user as $key => $item ){
 //         echo $key." ".$item.", ";
 // }
-$son = [];
-$son[0] = 12;
-$son[1] = 19;
-$son['ism'] = "test"; 
-print_r($son);
-$sonlar = [4,5,64,56,56,5,6,4,3,2,12];
-array_splice($sonlar,2,2);
-print_r($sonlar);
+// $son = [];
+// $son[0] = 12;
+// $son[1] = 19;
+// $son['ism'] = "test"; 
+// print_r($son);
+// $sonlar = [4,5,64,56,56,5,6,4,3,2,12];
+// array_splice($sonlar,2,2);
+// print_r($sonlar);
 
+           
+                // o'n to'rtinchi dars
 
+// Multidimensional Arrays
+
+// $users = [ 
+//         ["Ism" => "Ali", "Familiya" => "Ozodov", "T_yili" => 1995],
+//         ["Ism" => "Bekzod", "Familiya" => "Masharipov", "T_yili" => 1996],
+//         ["Ism" => "Odilbek", "Familiya" => "Karimov", "T_yili" => 1997],
+// ];
+// $son = [[3,5,6,[2,8,45]], 6,4,8];
+// print_r($users);
+// echo $users[1]['Ism'];
+// echo "\n";
+// foreach ($users as $item){
+//         echo $item['Ism'].", ";
+// } 
+
+                
 
 
 
