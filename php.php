@@ -513,14 +513,6 @@
 // foreach($user as $key => $item ){
 //         echo $key." ".$item.", ";
 // }
-// $son = [];
-// $son[0] = 12;
-// $son[1] = 19;
-// $son['ism'] = "test"; 
-// print_r($son);
-// $sonlar = [4,5,64,56,56,5,6,4,3,2,12];
-// array_splice($sonlar,2,2);
-// print_r($sonlar);
 
            
                 // o'n to'rtinchi dars
