@@ -1,0 +1,334 @@
+<!doctype html>
+<!--
+  Noodatiy interaktiv bitta-sahifa sayt
+  Foydalanish: faylni saqlang (masalan: noodatiy_sayt.html) va brauzerda oching.
+  Qisqacha: animatsiyalangan gradient fon, canvas — yulduz/partikula effekti, kursor izi, interaktiv kartalar,
+  va oddiy WebAudio 'harmonika' knopkasi.
+-->
+<html lang="uz">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Noodatiy Sayt — Labyrinth of Light</title>
+  <style>
+    :root{
+      --bg1:#0f172a; --bg2:#081029; --glass: rgba(255,255,255,0.06);
+      --accent: #9b5cf6; --accent2: #00d4ff;
+      --card-h: 180px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial}
+    body{
+      background: radial-gradient(1200px 800px at 10% 10%, rgba(155,92,246,0.10), transparent 5%),
+                  radial-gradient(1000px 700px at 90% 90%, rgba(0,212,255,0.06), transparent 5%),
+                  linear-gradient(180deg,var(--bg1),var(--bg2));
+      color:#e6eef8; overflow:hidden;
+      -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    }
+
+    /* Header */
+    header{
+      position:fixed;left:0;right:0;top:18px;padding:12px 36px;display:flex;align-items:center;gap:18px;z-index:40
+    }
+    .logo{display:flex;align-items:center;gap:12px}
+    .badge{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:700;box-shadow:0 6px 20px rgba(0,0,0,0.4)}
+    h1{font-size:18px;margin:0}
+    p.sub{margin:0;color:rgba(230,238,248,0.7);font-size:12px}
+
+    /* Canvas background */
+    #space{position:fixed;inset:0;z-index:0}
+
+    /* Center stage */
+    main{position:relative;z-index:10;display:grid;grid-template-columns:1fr 420px;gap:36px;padding:120px 56px 56px;height:100vh}
+
+    /* Left area — intro & controls */
+    .stage{align-self:start}
+    .panel{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));backdrop-filter:blur(8px);border-radius:16px;padding:22px;box-shadow:0 10px 40px rgba(2,6,23,0.6)}
+    .hero{padding:18px;border-radius:12px}
+    .kicker{font-size:12px;color:rgba(230,238,248,0.7);margin-bottom:8px}
+    .title{font-size:28px;margin:0 0 8px}
+    .desc{margin:0;color:rgba(230,238,248,0.8)}
+
+    .controls{display:flex;gap:10px;margin-top:16px}
+    button.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));border:none;padding:10px 14px;border-radius:10px;color:#071129;font-weight:600;cursor:pointer}
+    button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 12px;border-radius:10px;color:inherit;cursor:pointer}
+
+    /* Cards column */
+    .right{align-self:start}
+    .cards{display:grid;gap:14px}
+    .card{height:var(--card-h);border-radius:14px;padding:14px;background:linear-gradient(180deg,rgba(255,255,255,0.025),rgba(255,255,255,0.015));display:flex;flex-direction:column;justify-content:space-between;cursor:grab;transition:transform .25s ease, box-shadow .25s ease}
+    .card:active{cursor:grabbing}
+    .card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(2,6,23,0.6)}
+    .card h3{margin:0}
+    .card p{margin:6px 0 0;color:rgba(230,238,248,0.75)}
+
+    /* Footer floating controls */
+    .floater{position:fixed;right:28px;bottom:28px;z-index:60;display:flex;flex-direction:column;gap:12px}
+    .dot{width:56px;height:56px;border-radius:12px;background:var(--glass);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);cursor:pointer}
+
+    /* Cursor trail */
+    .trail{position:fixed;pointer-events:none;z-index:60}
+
+    /* Small responsive tweaks */
+    @media (max-width:920px){main{grid-template-columns:1fr; padding-top:160px} .right{order:2} header{padding:12px 18px}}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <div class="badge">L</div>
+      <div>
+        <h1>Labyrinth of Light</h1>
+        <p class="sub">Noodatiy sayt — kursor izlari, tovush, va interaktiv kartalar</p>
+      </div>
+    </div>
+    <div style="flex:1"></div>
+    <nav style="display:flex;gap:10px;align-items:center">
+      <button class="ghost" id="shuffle">Shuffle</button>
+      <button class="ghost" id="toggle-sound">Tovush: ON</button>
+    </nav>
+  </header>
+
+  <canvas id="space"></canvas>
+
+  <main>
+    <section class="stage">
+      <div class="panel hero">
+        <div class="kicker">Sizga noodatiy sayt kerak edi — mana u</div>
+        <h2 class="title">Labirint yoqimli yorug'liklar</h2>
+        <p class="desc">Harakat, surilish, va tovush yordamida sahifa siz bilan o'zaro aloqa qiladi. Kursoringizni harakatlantiring — fon yonib-o'chadi.
+        Kartalarni sudrab ko'ring, "Shuffle" bosing yoki tovushni o'chiring.</p>
+
+        <div class="controls">
+          <button class="primary" id="play-tone">Harmoniya</button>
+          <button class="ghost" id="spawn">Yangi Partikula</button>
+        </div>
+      </div>
+
+      <div style="height:16px"></div>
+
+      <div class="panel">
+        <div style="display:flex;gap:12px;align-items:center">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M12 2L2 7l10 5 10-5-10-5z" stroke="rgba(255,255,255,0.6)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div>
+            <div style="font-weight:700">Interaktiv komponentlar</div>
+            <div style="font-size:12px;color:rgba(230,238,248,0.7)">Kartalarni tortib o'zgartiring yoki ularni "Shuffle" qiling</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="right">
+      <div class="cards">
+        <div class="card" data-seed="7">
+          <div>
+            <h3>Memory Pocket</h3>
+            <p>Qisqa xabarlar va sirli yozuvlar uchun joy. Sudrab ko'ring.</p>
+          </div>
+          <small style="opacity:.7">Drag to move</small>
+        </div>
+        <div class="card" data-seed="13">
+          <div>
+            <h3>Neon Map</h3>
+            <p>Joylarni o'rganish; har bir klikda fon ranglari o'zgaradi.</p>
+          </div>
+          <small style="opacity:.7">Click me</small>
+        </div>
+        <div class="card" data-seed="4">
+          <div>
+            <h3>Echo Chamber</h3>
+            <p>Tovush bilan sinab ko'ring: 'Harmoniya' tugmasi — kichik melodiya yaratadi.</p>
+          </div>
+          <small style="opacity:.7">Press play</small>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <div class="floater">
+    <div class="dot" id="pulse">●</div>
+    <div class="dot" id="clear">☐</div>
+  </div>
+
+  <script>
+    // Basic setup
+    const canvas = document.getElementById('space');
+    const ctx = canvas.getContext('2d');
+    let W = canvas.width = innerWidth;
+    let H = canvas.height = innerHeight;
+
+    // Particles
+    let particles = [];
+    function rand(min,max){return Math.random()*(max-min)+min}
+    function makeParticle(x,y,seed){
+      return {x,y,vx:rand(-0.6,0.6),vy:rand(-0.6,0.6),r:rand(0.6,2.8),life:rand(80,260),age:0,seed};
+    }
+    for(let i=0;i<120;i++) particles.push(makeParticle(rand(0,W),rand(0,H),i%7));
+
+    // cursor trail
+    const trail = [];
+    const trailEl = document.createElement('div');
+    trailEl.className='trail';
+    document.body.appendChild(trailEl);
+
+    window.addEventListener('resize',()=>{W=canvas.width=innerWidth;H=canvas.height=innerHeight});
+    window.addEventListener('mousemove',(e)=>{
+      trail.push({x:e.clientX,y:e.clientY,t:Date.now()});
+      if(trail.length>40) trail.shift();
+    });
+
+    // draw loop
+    let hueShift = 0;
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      hueShift += 0.2;
+
+      // subtle background glow based on cursor
+      if(trail.length){
+        const t = trail[trail.length-1];
+        const grad = ctx.createRadialGradient(t.x,t.y,20,t.x,t.y,Math.max(W,H)*0.7);
+        grad.addColorStop(0, `rgba(155,92,246,0.12)`);
+        grad.addColorStop(0.6, `rgba(0,212,255,0.05)`);
+        grad.addColorStop(1, `rgba(8,16,41,0)`);
+        ctx.fillStyle = grad;
+        ctx.fillRect(0,0,W,H);
+      }
+
+      // particles
+      for(let p of particles){
+        p.x += p.vx; p.y += p.vy; p.age++;
+        p.vx += Math.sin((p.seed + hueShift/50))/120;
+        p.vy += Math.cos((p.seed + hueShift/50))/140;
+        const lifeFactor = 1 - p.age/p.life;
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(${Math.floor(155+100*Math.sin(hueShift/20))},${Math.floor(92+60*Math.cos(hueShift/30))},${Math.floor(246-40*Math.sin(hueShift/25))},${0.22*lifeFactor})`;
+        ctx.arc(p.x,p.y,p.r * Math.max(0,lifeFactor),0,Math.PI*2);
+        ctx.fill();
+        if(p.age>p.life){ Object.assign(p, makeParticle(rand(0,W),rand(0,H),p.seed)); }
+      }
+
+      // small lines between particles
+      for(let i=0;i<40;i++){
+        const a = particles[i];
+        const b = particles[(i*7)%particles.length];
+        const d2 = (a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y);
+        if(d2<20000){
+          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+          ctx.strokeStyle = 'rgba(100,140,255,0.03)'; ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    // simple shuffle function for cards
+    const cards = Array.from(document.querySelectorAll('.card'));
+    function shuffleCards(){
+      const parent = cards[0].parentNode;
+      for(let c of cards){ parent.removeChild(c); }
+      const arr = cards.sort(()=>Math.random()-0.5);
+      for(let c of arr){ parent.appendChild(c); }
+    }
+    document.getElementById('shuffle').addEventListener('click',shuffleCards);
+
+    // spawn particle
+    document.getElementById('spawn').addEventListener('click',()=>{
+      particles.push(makeParticle(rand(0,W),rand(0,H),Math.floor(rand(0,99))));
+    });
+
+    // interactive cards: drag to move
+    let dragEl = null, offset = {x:0,y:0};
+    document.addEventListener('pointerdown',(e)=>{
+      const el = e.target.closest('.card');
+      if(!el) return;
+      dragEl = el; el.style.position='relative'; el.style.zIndex=80;
+      offset.x = e.clientX - el.getBoundingClientRect().left;
+      offset.y = e.clientY - el.getBoundingClientRect().top;
+      el.setPointerCapture(e.pointerId);
+      el.style.transition='transform .06s linear';
+    });
+    document.addEventListener('pointermove',(e)=>{
+      if(!dragEl) return;
+      dragEl.style.transform = `translate(${e.clientX-offset.x}px, ${e.clientY-offset.y}px)`;
+    });
+    document.addEventListener('pointerup',(e)=>{
+      if(!dragEl) return; dragEl.style.transition='transform .25s ease'; dragEl.style.zIndex=''; dragEl=null;
+    });
+
+    // small pulse effect
+    document.getElementById('pulse').addEventListener('click',()=>{
+      for(let i=0;i<9;i++) particles.push(makeParticle(W/2 + rand(-200,200), H/2 + rand(-200,200), i));
+    });
+    document.getElementById('clear').addEventListener('click',()=>{ particles = []; });
+
+    // web audio: simple harmonic touch
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null; let masterOn = true;
+    document.getElementById('toggle-sound').addEventListener('click', (e)=>{
+      masterOn = !masterOn; e.target.textContent = 'Tovush: '+(masterOn? 'ON' : 'OFF');
+    });
+
+    function playHarmony(){
+      if(!masterOn) return;
+      if(!audioCtx) audioCtx = new AudioCtx();
+      const now = audioCtx.currentTime;
+      const freqs = [330, 440, 523.25];
+      for(let i=0;i<freqs.length;i++){
+        const o = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        o.type = ['sine','triangle','sawtooth'][i%3];
+        o.frequency.value = freqs[i];
+        g.gain.value = 0.0001;
+        o.connect(g); g.connect(audioCtx.destination);
+        o.start(now + i * 0.08);
+        g.gain.linearRampToValueAtTime(0.05, now + i*0.08 + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.00001, now + i*0.6 + i*0.08);
+        o.stop(now + i*0.9);
+      }
+    }
+    document.getElementById('play-tone').addEventListener('click',playHarmony);
+
+    // small interaction: clicking card 2 changes palette
+    cards[1].addEventListener('click',()=>{
+      document.documentElement.style.setProperty('--accent','#ff7a7a');
+      document.documentElement.style.setProperty('--accent2','#ffd36b');
+      // add a flash of particles
+      for(let i=0;i<60;i++) particles.push(makeParticle(rand(0,W),rand(0,H),Math.floor(rand(0,99))));
+    });
+
+    // tiny idle movement for cards
+    setInterval(()=>{
+      for(let c of cards){
+        c.style.transform = `translateY(${Math.sin(Date.now()/1500 + (parseInt(c.dataset.seed)||0))*6}px)`;
+      }
+    },60);
+
+    // initial micro motion of trail element (visual cursor dots)
+    function renderTrailDots(){
+      // clear previous
+      trailEl.innerHTML = '';
+      const now = Date.now();
+      for(let i=trail.length-1;i>=0;i--){
+        const t = trail[i];
+        const age = (now - t.t)/400;
+        if(age>1) continue;
+        const dot = document.createElement('div');
+        dot.style.position='absolute'; dot.style.left=(t.x-6)+'px'; dot.style.top=(t.y-6)+'px'; dot.style.width=(12*(1-age))+'px'; dot.style.height=(12*(1-age))+'px'; dot.style.borderRadius='50%';
+        dot.style.boxShadow='0 6px 18px rgba(0,0,0,0.45)'; dot.style.background = `radial-gradient(circle at 30% 30%, rgba(255,255,255,${0.14*(1-age)}), rgba(155,92,246,${0.14*(1-age)}))`;
+        trailEl.appendChild(dot);
+      }
+      requestAnimationFrame(renderTrailDots);
+    }
+    renderTrailDots();
+
+    // gentle autoplay particle drift
+    setInterval(()=>{
+      for(let p of particles){ p.vx += rand(-0.02,0.02); p.vy += rand(-0.02,0.02); }
+    },1200);
+
+  </script>
+</body>
+</html>
